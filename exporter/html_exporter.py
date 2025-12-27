@@ -160,7 +160,8 @@ class HtmlExporter(threading.Thread):
         images = self.image_exporter.get_images(msg)
 
         # 朋友圈视频
-        videos = self.video_exporter.get_videos(msg)
+        # videos = self.video_exporter.get_videos(msg)
+        videos = []
 
         # 样式   3:链接样式
         content_style = msg.timelineObject.ContentObject.contentStyle
