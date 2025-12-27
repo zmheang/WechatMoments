@@ -157,7 +157,8 @@ class HtmlExporter(threading.Thread):
         remark = contact.remark if contact.remark else contact.nickName
 
         # 朋友圈图片
-        images = self.image_exporter.get_images(msg)
+        # images = self.image_exporter.get_images(msg)
+        images = []
 
         # 朋友圈视频
         # videos = self.video_exporter.get_videos(msg)
@@ -182,50 +183,59 @@ class HtmlExporter(threading.Thread):
         html += '          </div>\n'
 
         # 超链接
+        # if content_style == 3:
+        #     html += f'  <a href="{msg.timelineObject.ContentObject.contentUrl}" target="_blank">\n'
+        #     html += '      <div class ="out_link" >\n'
+        #     if images:
+        #         thumb_path, image_path = images[0]
+        #         html += f'        <img src = "{thumb_path}"/>\n'
+        #     html += f'       <div class ="text" >{msg.timelineObject.ContentObject.title}</div>\n'
+        #     html += '      </div >\n'
+        #     html += '   </a>\n'
+
         if content_style == 3:
-            html += f'  <a href="{msg.timelineObject.ContentObject.contentUrl}" target="_blank">\n'
-            html += '      <div class ="out_link" >\n'
-            if images:
-                thumb_path, image_path = images[0]
-                html += f'        <img src = "{thumb_path}"/>\n'
-            html += f'       <div class ="text" >{msg.timelineObject.ContentObject.title}</div>\n'
-            html += '      </div >\n'
-            html += '   </a>\n'
+            html += ''
         # 音乐
+        # elif is_music_msg(msg):
+
+        #     title, musician, src = get_music_info(msg)
+        #     html += f'  <a href="{msg.timelineObject.ContentObject.contentUrl}" target="_blank">\n'
+        #     html += '      <div class ="music_link" >\n'
+        #     html += '        <div class ="music_des" >\n'
+        #     if images:
+        #         thumb_path, image_path = images[0]
+        #         html += f'        <img src = "{thumb_path}"/>\n'
+        #     html += '             <div class = "music_title_musician">\n'
+        #     html += f'               <div class = "music_title">{title}</div>\n'
+        #     html += f'               <div class = "music_musician">{musician}</div>\n'
+        #     html += '             </div>\n'
+        #     html += '         </div>\n'
+        #     html += f'        <audio class = "music_audio" controls>'
+        #     html += f'             <source src="{src}" type="audio/mpeg">'
+        #     html += f'        </audio>'
+        #     html += '      </div >\n'
+        #     html += '   </a>\n'
+
         elif is_music_msg(msg):
-
-            title, musician, src = get_music_info(msg)
-            html += f'  <a href="{msg.timelineObject.ContentObject.contentUrl}" target="_blank">\n'
-            html += '      <div class ="music_link" >\n'
-            html += '        <div class ="music_des" >\n'
-            if images:
-                thumb_path, image_path = images[0]
-                html += f'        <img src = "{thumb_path}"/>\n'
-            html += '             <div class = "music_title_musician">\n'
-            html += f'               <div class = "music_title">{title}</div>\n'
-            html += f'               <div class = "music_musician">{musician}</div>\n'
-            html += '             </div>\n'
-            html += '         </div>\n'
-            html += f'        <audio class = "music_audio" controls>'
-            html += f'             <source src="{src}" type="audio/mpeg">'
-            html += f'        </audio>'
-            html += '      </div >\n'
-            html += '   </a>\n'
+             html += ''
         # 视频号
-        elif msg.timelineObject.ContentObject.finderFeed:
-            html += f'     <div style="width:10rem; overflow:hidden">\n'
-            # 视频号图片
-            thumb_path = self.image_exporter.get_finder_images(msg)
-            html += f"""       <img src=\"{thumb_path}\" onclick=\"openWarningOverlay(event)\" 
-                               style=\"width:10rem;height:10rem;object-fit:cover;cursor:pointer;\"/>\n"""
-            html += '      </div>\n'
+        # elif msg.timelineObject.ContentObject.finderFeed:
+        #     html += f'     <div style="width:10rem; overflow:hidden">\n'
+        #     # 视频号图片
+        #     thumb_path = self.image_exporter.get_finder_images(msg)
+        #     html += f"""       <img src=\"{thumb_path}\" onclick=\"openWarningOverlay(event)\" 
+        #                        style=\"width:10rem;height:10rem;object-fit:cover;cursor:pointer;\"/>\n"""
+        #     html += '      </div>\n'
 
-            # 视频号说明
-            html += '          <div class="texts_box">\n'
-            nickname = msg.timelineObject.ContentObject.finderFeed.nickname
-            desc = msg.timelineObject.ContentObject.finderFeed.desc
-            html += f'            <p class="location">视频号 · {nickname} · {desc}</p>\n'
-            html += '         </div>\n'
+        #     # 视频号说明
+        #     html += '          <div class="texts_box">\n'
+        #     nickname = msg.timelineObject.ContentObject.finderFeed.nickname
+        #     desc = msg.timelineObject.ContentObject.finderFeed.desc
+        #     html += f'            <p class="location">视频号 · {nickname} · {desc}</p>\n'
+        #     html += '         </div>\n'
+
+        elif msg.timelineObject.ContentObject.finderFeed:
+            html += ''
         # 普通朋友圈
         else:
             html += f'     <div style="{get_img_div_css(len(images))}">\n'
