@@ -116,7 +116,7 @@ class HtmlExporter(threading.Thread):
         end_time = time.mktime(datetime.datetime(end_date.year, end_date.month, end_date.day).timetuple())
 
         self.gui.image_decrypter.decrypt_images(self, self.begin_date, end_date, self.dir_name)
-        self.gui.video_decrypter.decrypt_videos(self, self.begin_date, end_date, self.dir_name, self.convert_video)
+        # self.gui.video_decrypter.decrypt_videos(self, self.begin_date, end_date, self.dir_name, self.convert_video)
 
 
         message_datas = sns_db.get_messages_in_time(begin_time, end_time)
